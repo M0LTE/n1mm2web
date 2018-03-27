@@ -30,6 +30,14 @@ Logs go to wherever you configured, e.g. `/var/log/n1mm2web.log`
 
 ### As a service
 ```
+cd /usr/local
+
+wget https://github.com/M0LTE/n1mm2web/releases/download/1.0/n1mm2web-raspi.zip
+
+unzip n1mm2web-raspi.zip
+
+chmod +x n1mm2web/n1mm2web
+
 echo "[Unit]
 Description=n1mm2web
 [Service]
@@ -42,7 +50,9 @@ User=root
 Environment=\"\"
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/n1mm2web.service
+
 systemctl enable n1mm2web.service
+
 systemctl start n1mm2web.service
 ```
 
