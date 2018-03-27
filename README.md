@@ -29,7 +29,22 @@ chmod +x n1mm2web
 Logs go to wherever you configured, e.g. `/var/log/n1mm2web.log`
 
 ### As a service
-tbc
+```
+echo "[Unit]
+Description=n1mm2web
+[Service]
+WorkingDirectory=/usr/local/n1mm2web
+ExecStart=/usr/local/n1mm2web/n1mm2web
+Restart=always
+RestartSec=10  # Restart service after 10 seconds if it crashes
+SyslogIdentifier=n1mm2web
+User=root
+Environment=\"\"
+[Install]
+WantedBy=multi-user.target" > /etc/systemd/system/n1mm2web.service
+systemctl enable n1mm2web.service
+systemctl start n1mm2web.service
+```
 
 Logs go to wherever you configured, e.g. `/var/log/n1mm2web.log`
 
