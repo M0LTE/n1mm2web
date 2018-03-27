@@ -1,15 +1,21 @@
 # n1mm2web
 A small .NET Core 2.0 console app that listens for RadioInfo datagrams from N1MM and uploads them to a website in HTML format to be included in a page. Designed for GB2GP but readily adaptable.  
-Being .NET Core this will be cross-platform.
+Being .NET Core this will be cross-platform. Substitute platforms below as required.
 
 ## Building
+Install the .NET Core SDK, then publish:
+
 ```
-dotnet publish n1mm2web -r linux-arm -o ..\pub\pi
+dotnet publish n1mm2web -r linux-arm -o ../pub/pi
 ```
 
+Publishing should be possible on Windows, Linux and OS X.
+
+The output is a native Linux executable without dependencies other than those that appear in the output directory.
+
 ## Deploying
-* Copy the output of pub\pi to a Raspberry Pi
-* Copy appsettings.json to /etc/n1mm2web.conf
+* Copy the output of pub/pi to a Raspberry Pi
+* Copy the supplied n1mm2web.json to /etc/n1mm2web.conf (or it can live next to the binary if you prefer)
 * Edit n1mm2web.conf and supply FTP details
 
 ## Running
@@ -17,13 +23,14 @@ dotnet publish n1mm2web -r linux-arm -o ..\pub\pi
 ```
 chmod +x n1mm2web
 ./n1mm2web
+```
 
-Logs go to wherever you configured, e.g. /var/log/n1mm2web.log
+Logs go to wherever you configured, e.g. `/var/log/n1mm2web.log`
 
 ### As a service
 tbc
 
-Logs go to wherever you configured, e.g. /var/log/n1mm2web.log
+Logs go to wherever you configured, e.g. `/var/log/n1mm2web.log`
 
 ## To do
 * Maybe look at making the HTML output template-based, maybe using the Razor engine or something to generate an HTML fragment

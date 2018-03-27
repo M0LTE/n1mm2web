@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 
@@ -61,9 +63,11 @@ namespace n1mm2web
 
         private static void FetchConfig()
         {
+            string appDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
             IConfiguration config = new ConfigurationBuilder()
-                .AddJsonFile(path: "appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile(path: "/etc/n1mm2web.conf", optional: true, reloadOnChange: true)
+                .AddJsonFile(path: Path.Combine(appDir, "n1mm2web.json"), optional: true, reloadOnChange: true)
+                .AddJsonFile(path: "/etc/n1mm2web.json", optional: true, reloadOnChange: true)
                 .Build();
 
             ftpUser = config["ftpUser"];
