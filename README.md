@@ -26,7 +26,7 @@ chmod +x n1mm2web
 ./n1mm2web
 ```
 
-Logs go to wherever you configured, e.g. `/var/log/n1mm2web.log`
+Logs go to wherever you configured, e.g. `/var/log/n1mm2web.log`, as well as the console.
 
 ### As a service
 ```
@@ -57,6 +57,8 @@ systemctl start n1mm2web.service
 ```
 
 Logs go to wherever you configured, e.g. `/var/log/n1mm2web.log`
+
+If this is on a Pi, you'll want to change the log directory, mount /var/log to a ramdisk, disable logging (blank logfile config setting), or use a high write-endurance card.
 
 ## To do
 * Maybe look at making the HTML output template-based, maybe using the Razor engine or something to generate an HTML fragment
