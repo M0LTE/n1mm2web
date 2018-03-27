@@ -17,6 +17,7 @@ The output is a native Linux executable without dependencies other than those th
 * Copy the output of pub/pi to a Raspberry Pi
 * Copy the supplied n1mm2web.json to /etc/n1mm2web.conf (or it can live next to the binary if you prefer)
 * Edit n1mm2web.conf and supply FTP details
+* apt-get -qqy install libunwind8
 
 ## Running
 ### At the console:

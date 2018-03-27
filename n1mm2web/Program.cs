@@ -19,16 +19,26 @@ namespace n1mm2web
 
         static int Main(string[] args)
         {
-            FetchConfig();
-            if (!CheckConfig())
-                return -1;
+            try
+            {
+                Log("Starting");
+                FetchConfig();
+                if (!CheckConfig())
+                {
+                    return -1;
+                }
 
-            Log($"Listing for N1MM on port {n1mmPort}, uploading to ftp://{ftpUser.Replace("@", "%40")}:{new String('*', ftpPassword.Length)}@{ftpServer}:{ftpPort}/{ftpFilePath}");
+                Log($"Listing for N1MM on port {n1mmPort}, uploading to ftp://{ftpUser.Replace("@", "%40")}:{new String('*', ftpPassword.Length)}@{ftpServer}:{ftpPort}/{ftpFilePath}");
 
-            udpThread.Start();
-            webThread.Start();
-            Thread.CurrentThread.Join();
-            return 0;
+                udpThread.Start();
+                webThread.Start();
+                Thread.CurrentThread.Join();
+                return 0;
+            }
+            finally
+            {
+                Log("Stopping");
+            }
         }
 
         private static bool CheckConfig()
@@ -59,6 +69,11 @@ namespace n1mm2web
                 Log("ftpFilePath configuration setting is empty");
             }
 
+            if (string.IsNullOrWhiteSpace(logfile))
+            {
+                Log("Warn: logfile is not set, log won't be written");
+            }
+
             return !prob;
         }
 
@@ -75,6 +90,7 @@ namespace n1mm2web
             ftpPassword = config["ftpPassword"];
             ftpServer = config["ftpServer"];
             ftpFilePath = config["ftpFilePath"];
+            logfile = config["logfile"];
             if (!int.TryParse(config["ftpPort"], out ftpPort))
             {
                 ftpPort = 21;
@@ -238,7 +254,12 @@ namespace n1mm2web
         {
             string line = string.Format("{0:yyyy-MM-dd HH:mm:ss}Z {1}{2}", DateTime.UtcNow, string.Format(format, args), Environment.NewLine);
 
-            Console.WriteLine(line);
+            Console.Write(line);
+
+            if (string.IsNullOrWhiteSpace(logfile))
+            {
+                return;
+            }
 
             try
             {
