@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "n1mm2web", "n1mm2web\n1mm2web.csproj", "{FBC5D74B-1CB5-4654-AD5A-598037CCA3FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "n1mmemu-radio", "n1mmemu-radio\n1mmemu-radio.csproj", "{A0380218-97B5-4AE7-BFD4-7ABF70CFDAFE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBC5D74B-1CB5-4654-AD5A-598037CCA3FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBC5D74B-1CB5-4654-AD5A-598037CCA3FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBC5D74B-1CB5-4654-AD5A-598037CCA3FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBC5D74B-1CB5-4654-AD5A-598037CCA3FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0380218-97B5-4AE7-BFD4-7ABF70CFDAFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0380218-97B5-4AE7-BFD4-7ABF70CFDAFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0380218-97B5-4AE7-BFD4-7ABF70CFDAFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0380218-97B5-4AE7-BFD4-7ABF70CFDAFE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB677B84-095E-4D8C-8C92-FF5770BF1338}
+	EndGlobalSection
+EndGlobal
