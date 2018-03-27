@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -199,8 +198,6 @@ namespace n1mm2web
 
         static bool TryUpload(string html)
         {
-            Log("Uploading");
-
             try
             {
                 string uri = $"ftp://{ftpServer}:{ftpPort}/{ftpFilePath}";
@@ -214,12 +211,12 @@ namespace n1mm2web
                 requestStream.Close();
                 var response = (FtpWebResponse)request.GetResponse();
 
-                Log($"FTP response: {(response.StatusDescription ?? "").Replace("\r", "").Replace("\n", " ")}");
+                Log($"Uploaded, server responded \"{(response.StatusDescription ?? "").Replace("\r", "").Replace("\n", " ")}\"");
                 return true;
             }
             catch (Exception ex)
             {
-                Log("Exception uploading: {0}", ex);
+                Log("Upload failed: {0}", ex.Message);
                 return false;
             }
         }
