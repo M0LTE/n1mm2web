@@ -1,0 +1,1 @@
+﻿This is for testing n1mm2web without an instance of N1MM running. It just outputs a RadioInfo datagram every so often.

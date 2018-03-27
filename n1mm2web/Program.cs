@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -13,7 +14,7 @@ namespace n1mm2web
 {
     class Program
     {
-        static string ftpUser, ftpPassword, ftpServer, ftpFilePath;
+        static string ftpUser, ftpPassword, ftpServer, ftpFilePath, logfile;
         static int ftpPort, n1mmPort;
 
         static int Main(string[] args)
@@ -230,10 +231,30 @@ namespace n1mm2web
             }
         }
 
+        static bool haveWarnedAboutLog = false;
+        static object logLockObj = new object();
+
         static void Log(string format, params object[] args)
         {
-            Console.Write("{0:yyyy-MM-dd HH:mm:ss}Z ", DateTime.UtcNow);
-            Console.WriteLine(format, args);
+            string line = string.Format("{0:yyyy-MM-dd HH:mm:ss}Z {1}{2}", DateTime.UtcNow, string.Format(format, args), Environment.NewLine);
+
+            Console.WriteLine(line);
+
+            try
+            {
+                lock (logLockObj)
+                {
+                    File.AppendAllText(logfile, line);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (!haveWarnedAboutLog)
+                {
+                    Console.WriteLine($"Struggling to write to logfile {logfile}: {ex.Message}");
+                    haveWarnedAboutLog = true;
+                }
+            }
         }
 
         static void ProcessDatagram(byte[] msg)
